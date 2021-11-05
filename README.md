@@ -2,12 +2,13 @@
 For all ya'll that borrow from your rents interest free ;)
 
 Child (user) contract functionality:
+- Create borrow request
 - Post how much money to be borrowed
 - Request approval from parent
 
 Parent (manager) contract functionality:
-- Aprove / reject approval
-- Determine interest rate
+- Set interest rate on borrow request
+- Aprove / reject borrow request
 - Deploy loan contract if approved
     - time of loan
     - interst rate (if any)
