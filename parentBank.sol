@@ -5,23 +5,22 @@ contract borrowRequest {
     address public parent;
     address public child;
     
-    uint public loanbalance;
+    struct Loan {
+        uint totalBalance;
+        uint remainingDebt;
+        uint payBackDate;
+        uint interestRate;
+        uint payment;
+        address lender;
+        address borrower;
+    }
+
+    uint public proposedAmount;
+    bool public parentApproved;
+    Loan public loan;
     
-    // parent vars
-    uint public payBackDate;
-    uint public interestRate;
-    uint public payInterval; // pay intervals can be a enum [daily, weekly, monthly]
-    bool public isApproved;
-    
-    // child vars
-    uint public amount;
-    bool acceptsConditions;
-    
-    constructor(address creator) {
-        child = creator;
-        isApproved = false;
-        loanbalance = 0;
-        acceptsConditions = false;
+    constructor() {
+        child = msg.sender;
     }
     
     modifier parentRestricted() {
@@ -40,38 +39,41 @@ contract borrowRequest {
     
     // child asks for money
     function askForMoney(uint value) public {
-        amount = value;
-    }
-    
-    // parent determines the loan details
-    function addRequestRestraints(
-        uint date, uint interest, uint interval
-        ) public parentRestricted {
-            payBackDate = date;
-            interestRate = interest;
-            payInterval = interval;
-        }
-    
-    // child approves details
-    function approveConditions(bool doesApprove) public childRestricted {
-        if(doesApprove == true) {
-            acceptsConditions = true;
-        } else {
-            acceptsConditions =  false;
-        }
+        proposedAmount = value;
     }
     
     // parent approves loan
-    function approveLoan() public payable parentRestricted {
-        require(msg.value >= amount);
-        loanbalance += msg.value;
+    function approveLoan(bool approved) public parentRestricted {
+        parentApproved = approved;
     }
     
-    uint dateNow = 0; // get date.now
-    function forfietFunds() public payable {
-        if((loanbalance < amount) && (dateNow > payBackDate) ) {
-            payable(parent).transfer(loanbalance);
+    // parent determines loan details and creates loan
+    function createLoan(uint totalVal, uint date, uint rate, uint recurringVal)
+    public payable parentRestricted {
+        if(parentApproved) {
+            Loan memory newLoan = Loan(
+                totalVal,
+                totalVal,
+                date,
+                rate,
+                recurringVal,
+                parent,
+                child
+            );
+            loan = newLoan;
         }
     }
     
+    // child provides payment
+    function payBackLoan() public payable childRestricted {
+        require(msg.value > 0);
+        loan.remainingDebt = loan.totalBalance - msg.value;
+    }
+
+    uint dateNow = 0; // get date.now
+    function forfietFunds() public payable {
+        if((loan.remainingDebt < loan.totalBalance) && (dateNow > loan.payBackDate) ) {
+            payable(parent).transfer(loan.totalBalance);
+        }
+    }
 }
