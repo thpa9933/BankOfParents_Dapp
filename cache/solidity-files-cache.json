@@ -1,0 +1,75 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "C:\\Users\\tepay\\Projects\\Ethereum\\bankOfParents\\contracts\\BorrowRequest.sol": {
+      "lastModificationDate": 1636306891457,
+      "contentHash": "f51b8cd9c3aacdb25b1d0c1df2b38faa",
+      "sourceName": "contracts/BorrowRequest.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.9"
+      ],
+      "artifacts": [
+        "BorrowRequest"
+      ]
+    },
+    "C:\\Users\\tepay\\Projects\\Ethereum\\bankOfParents\\contracts\\borrowRequest.sol": {
+      "lastModificationDate": 1636307582972,
+      "contentHash": "f51b8cd9c3aacdb25b1d0c1df2b38faa",
+      "sourceName": "contracts/borrowRequest.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.9"
+      ],
+      "artifacts": [
+        "BorrowRequest"
+      ]
+    }
+  }
+}

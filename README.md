@@ -1,6 +1,8 @@
 # BankOfParents_Dapp
 For all ya'll that borrow from your rents interest free ;)
 
+**hardhat, ethers, chai**
+
 Child (user) contract functionality:
 - Create borrow request
 - Post how much money to be borrowed
