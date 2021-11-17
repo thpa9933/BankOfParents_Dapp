@@ -8,10 +8,8 @@ const Layout = (props) => {
     return (
         <Container>
             <Header/>
-            {props.children}
-            <Request
-                contract={props.contract}
-            />
+                {props.children}
+            <Request/>
         </Container>
     );
 }

@@ -3,7 +3,7 @@ import Contract from '../artifacts/contracts/borrowRequest.sol/BorrowRequest.jso
 
 const instance = new web3.eth.Contract(
     Contract.abi,
-    '0xd9145CCE52D386f254917e481eB44e9943F39138'
+    '0xf699930B51816ce52bF34c35F84A437AD123c04C'
 );
 
 export default instance;

@@ -1,39 +1,25 @@
 import React from 'react';
-import { render } from 'react-dom';
 import { Form, Message, Button, Input } from 'semantic-ui-react';
+import web3 from '../ethereum/web3';
+import Contract from '../ethereum/contract';
 
 class Request extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             errorMessage: false,
-            loading: false, 
-            value: 0,
-            contractInstance: undefined
+            loading: false,
+            value: 0
         }
     }
 
-    componentDidMount = () => {
-        this.setState({
-            contractInstance: this.props.contract
-        })
-    }
-
-    onSubmit = async (event) => {
-        const ct = this.state.contractInstance;
-
-        try {
-            const accounts = web3.eth.getAccount();
-
-            await ct.methods.askForMoney(event.target).send({
-                from: accounts[0]
-            });
-
-        } catch (err) {
-            this.setState({
-                errorMessage: err.Message
-            });
-        }
+    onSubmit = async () => {
+        const accounts = await web3.eth.getAccounts();
+        console.log(this.state.value);
+        console.log(Contract);
+        await Contract.methods.askForMoney(this.state.value).send({
+            from: accounts[0]
+        });
     }
 
     render() {
@@ -42,7 +28,7 @@ class Request extends React.Component {
                 <h3>Creat a loan</h3>
                 <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                     <Form.Field>
-                        <label>What size loan?</label>
+                        <label>How much money would you like to borrow?</label>
                         <Input 
                             label="Dollars"
                             labelPosition="right"
@@ -54,8 +40,6 @@ class Request extends React.Component {
                     <Message error header="Oops!" content={this.state.errorMessage}/>
                     <Button loading={this.state.loading} primary>Request!</Button>
                 </Form>
-
-                <Message error header="Oops!" content={this.state.errorMessage}/>
             </>
         );
     }
