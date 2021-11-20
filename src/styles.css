@@ -12,6 +12,14 @@ body {
     margin: 0;
   }
 
+a {
+  color: white;
+}
+
+label {
+  color: var(--accent);
+}
+
 .header {
     display: flex;
     width: 100%;
@@ -20,6 +28,10 @@ body {
 
 .menu {
   display: flex;
+  border: 1px solid white;
+  border-radius: 3px;
+  padding: 3px;
+  margin-bottom: 10px;
 }
 
 #nav {
@@ -33,6 +45,7 @@ body {
   width: 75%;
   margin: auto;
 }
+
 
 
 
